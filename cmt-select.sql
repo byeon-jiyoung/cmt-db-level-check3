@@ -50,10 +50,17 @@ LEFT JOIN attachment ON attachment.attachment_id = board.attachment_id
 WHERE board.author_id != @author_information 
 ORDER BY board_id DESC LIMIT 6;
 
--- 다음글
-SELECT board.title
-FROM board 
+-- 이전글
+SELECT *
+FROM board
 WHERE category_id = (SELECT category.category_id FROM board JOIN category ON board.category_id = category.category_id WHERE board_id = 1)
-ORDER BY board_id DESC LIMIT 1;
+AND board_id < 1
+ORDER BY board_id;
 
+-- 다음글
+SELECT *
+FROM board
+WHERE category_id = (SELECT category.category_id FROM board JOIN category ON board.category_id = category.category_id WHERE board_id = 1)
+AND board_id > 1
+ORDER BY board_id LIMIT 1;
 
