@@ -35,6 +35,7 @@ JOIN member ON reply.member_id = member.member_id
 WHERE board_id = 1;
 
 -- 작가이름, 작가직업, 작가소개글, 작가프로필 사진
+
 SELECT author.author_name, job.job_name, author.introduce, photo.path, photo.file_name, (SELECT COUNT(*) FROM subscribe WHERE author_id = @author_information) AS subscribe_count
 FROM author 
 JOIN member ON author_id = member_id 
@@ -49,13 +50,10 @@ LEFT JOIN attachment ON attachment.attachment_id = board.attachment_id
 WHERE board.author_id != @author_information 
 ORDER BY board_id DESC LIMIT 6;
 
--- 이전글, 다음글
+-- 다음글
 SELECT board.title
 FROM board 
 WHERE category_id = (SELECT category.category_id FROM board JOIN category ON board.category_id = category.category_id WHERE board_id = 1)
-ORDER BY board_id DESC;
+ORDER BY board_id DESC LIMIT 1;
 
-
-SELECT * FROM board 
-WHERE category_id = ;
 
