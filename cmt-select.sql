@@ -55,7 +55,7 @@ SELECT *
 FROM board
 WHERE category_id = (SELECT category.category_id FROM board JOIN category ON board.category_id = category.category_id WHERE board_id = 1)
 AND board_id < 1
-ORDER BY board_id;
+ORDER BY board_id LIMIT 1;
 
 -- 다음글
 SELECT *
